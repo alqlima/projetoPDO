@@ -17,6 +17,13 @@ try {
 	} else {
 		echo "Não há usuários cadastrados!";
 	}
+// Inserindo Dados
+	$nome = "Testador2";
+	$email = "testador2@hotmail.com";
+	$senha = md5("123");
+	$sql = "INSERT INTO testeuser SET nome = '$nome', email = '$email', senha = '$senha'";
+	$sql = $pdo->query($sql);
+	echo "Usuario inserido: ".$pdo->lastInsertId();
 
 }catch (PDOException $e) {
 	echo "Falhou: ".$e->getMessage();

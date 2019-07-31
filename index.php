@@ -1,12 +1,23 @@
 <?php 
 //PDO: Definindo Acesso
-$dsn = "mysql:dbname=nome;host=localhost";
+$dsn = "mysql:dbname=teste;host=localhost";
 $dbuser = "root";
 $dbpass = "";
 // Conectando ao Banco de Dados
 try {
 	$pdo = new PDO($dsn,$dbuser, $dbpass);
-	echo "Conexão estabelecida com Sucesso!!!";
+// Selecionando Dados
+	$sql = "SELECT * FROM testeuser";
+	$sql = $pdo->query($sql);
+
+	if($sql->rowCount() > 0) {
+		foreach($sql->fetchAll() as $usuario) {
+			echo "Nome: ".$usuario["nome"]."<br>";
+		}
+	} else {
+		echo "Não há usuários cadastrados!";
+	}
+
 }catch (PDOException $e) {
 	echo "Falhou: ".$e->getMessage();
 }

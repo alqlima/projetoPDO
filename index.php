@@ -25,13 +25,23 @@ try {
 	$sql = $pdo->query($sql);
 	echo "Usuario inserido: ".$pdo->lastInsertId();*/
 //Atualizando Dados
-	$sql = "UPDATE testeuser SET email= 'novo@hotmail.com' WHERE email= 'testador_2a@hotmail.com'";
+	/*$sql = "UPDATE testeuser SET email= 'novo@hotmail.com' WHERE email= 'testador_2a@hotmail.com'";
 	$sql = $pdo->query($sql);
 	echo "Usuário alterado com sucesso!";
 // Deletando Dados
 	$sql = "DELETE FROM testeuser WHERE id = 6";
 	$pdo->query($sql);
-	echo "Usuário deletado com sucesso!";
+	echo "Usuário deletado com sucesso!";*/
+// PDOStatement e binds
+	$nome = 'Pedro';
+	$id = 7;
+
+	$sql = "UPDATE testeuser SET nome = :novonome WHERE id = :id";
+	$sql = $pdo->prepare($sql);
+	$sql->bindValue(':novonome', $nome);
+	$sql->bindValue(':id', $id);
+	$sql->execute();
+	echo "Usuário atualizado com sucesso!!!";
 
 
 }catch (PDOException $e) {
